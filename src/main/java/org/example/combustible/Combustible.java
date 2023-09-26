@@ -7,11 +7,11 @@ public class Combustible {
     private final Tipo tipo;
     private final int litros;
 
-    public Combustible(Tipo type, int litres) throws LitrosNegativosException {
-        if (litres < 0) throw new LitrosNegativosException();
+    public Combustible(Tipo tipo, int litros) throws LitrosNegativosException {
+        if (litros < 0) throw new LitrosNegativosException();
 
-        this.tipo = type;
-        this.litros = litres;
+        this.tipo = tipo;
+        this.litros = litros;
     }
 
     public static void esCombustibleConsumidoPorKmRecorridoNegativo(float combustibleConsumidoPorKmRecorrido)

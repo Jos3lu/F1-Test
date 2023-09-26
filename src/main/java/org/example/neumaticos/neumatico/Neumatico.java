@@ -1,14 +1,14 @@
 package org.example.neumaticos.neumatico;
 
-import org.example.neumaticos.neumatico.exceptions.PorcentajeDeVidaDeNeumaticosConsumidoPorRecorridoNegativoException;
-import org.example.neumaticos.neumatico.exceptions.PorcentajeDeVidaNegativoException;
+import org.example.neumaticos.neumatico.exceptions.PorcentajeDeVidaDeNeumaticosConsumidoPorRecorridoNoValidoException;
+import org.example.neumaticos.neumatico.exceptions.PorcentajeDeVidaNoValidoException;
 
 public class Neumatico {
     private final Marca marca;
     private final float porcentajeDeVida;
 
-    public Neumatico(Marca marca, float porcentajeDeVida) throws PorcentajeDeVidaNegativoException {
-        if (porcentajeDeVida < 0f) throw new PorcentajeDeVidaNegativoException();
+    public Neumatico(Marca marca, float porcentajeDeVida) throws PorcentajeDeVidaNoValidoException {
+        if (porcentajeDeVida < 0f || porcentajeDeVida > 100f) throw new PorcentajeDeVidaNoValidoException();
 
         this.marca = marca;
         this.porcentajeDeVida = porcentajeDeVida;
@@ -22,10 +22,11 @@ public class Neumatico {
         return marca;
     }
 
-    public static void esPorcentajeDeVidaDeNeumaticosConsumidoPorRecorridoNegativo(float porcentajeDeVidaDeNeumaticosConsumidoPorRecorrido)
-            throws PorcentajeDeVidaDeNeumaticosConsumidoPorRecorridoNegativoException {
-        if (porcentajeDeVidaDeNeumaticosConsumidoPorRecorrido < 0f)
-            throw new PorcentajeDeVidaDeNeumaticosConsumidoPorRecorridoNegativoException();
+    public static void esPorcentajeDeVidaDeNeumaticosConsumidoPorRecorridoNoValido(float porcentajeDeVidaDeNeumaticosConsumidoPorRecorrido)
+            throws PorcentajeDeVidaDeNeumaticosConsumidoPorRecorridoNoValidoException {
+        if (porcentajeDeVidaDeNeumaticosConsumidoPorRecorrido < 0f ||
+                porcentajeDeVidaDeNeumaticosConsumidoPorRecorrido > 100f)
+            throw new PorcentajeDeVidaDeNeumaticosConsumidoPorRecorridoNoValidoException();
     }
 
     public static boolean esMarcaValida(Marca marca) {
