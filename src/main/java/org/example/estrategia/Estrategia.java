@@ -2,6 +2,7 @@ package org.example.estrategia;
 
 import org.example.combustible.Combustible;
 import org.example.combustible.exceptions.CombustibleConsumidoPorKmRecorridoNegativoException;
+import org.example.estrategia.exceptions.KilometrosARecorrerNegativoException;
 import org.example.neumaticos.neumatico.Neumatico;
 import org.example.neumaticos.neumatico.exceptions.PorcentajeDeVidaDeNeumaticosConsumidoPorRecorridoNoValidoException;
 import org.example.neumaticos.Neumaticos;

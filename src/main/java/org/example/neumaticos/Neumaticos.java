@@ -1,6 +1,5 @@
 package org.example.neumaticos;
 
-import org.example.neumaticos.neumatico.Marca;
 import org.example.neumaticos.neumatico.Neumatico;
 
 import java.util.List;
@@ -13,20 +12,21 @@ public class Neumaticos {
     }
 
     public boolean sonValidos(float neumaticosDesgaste) {
-        final Marca marca = neumaticos.get(0).getMarca();
-        final float porcentajeDeVida = neumaticos.get(0).getPorcentajeDeVida();
+    	Neumatico neumatico = neumaticos.get(0);
+        final String marca = neumatico.getMarca();
+        final float porcentajeDeVida = neumatico.getPorcentajeDeVida();
 
         return tiene4Neumaticos() && tienenMismaMarcaYPorcentajeDeVida(marca, porcentajeDeVida)
-                && Neumatico.esMarcaValida(marca)
-                && Neumatico.noSeDesgasta(neumaticosDesgaste, porcentajeDeVida);
+                && neumatico.esMarcaValida()
+                && neumatico.noSeDesgasta(neumaticosDesgaste);
     }
 
-    private boolean tiene4Neumaticos() {
+    public boolean tiene4Neumaticos() {
         return neumaticos.size() == 4;
     }
 
-    private boolean tienenMismaMarcaYPorcentajeDeVida(Marca marca, float porcentajeDeVida) {
-        return neumaticos.stream().allMatch(neumatico -> neumatico.getMarca().equals(marca)
+    public boolean tienenMismaMarcaYPorcentajeDeVida(String marca, float porcentajeDeVida) {
+        return neumaticos.stream().allMatch(neumatico -> neumatico.getMarca().equalsIgnoreCase(marca)
                 && neumatico.getPorcentajeDeVida() == porcentajeDeVida);
     }
 

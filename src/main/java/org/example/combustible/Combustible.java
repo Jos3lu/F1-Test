@@ -4,10 +4,10 @@ import org.example.combustible.exceptions.CombustibleConsumidoPorKmRecorridoNega
 import org.example.combustible.exceptions.LitrosNegativosException;
 
 public class Combustible {
-    private final Tipo tipo;
-    private final int litros;
+    private final String tipo;
+    private final float litros;
 
-    public Combustible(Tipo tipo, int litros) throws LitrosNegativosException {
+    public Combustible(String tipo, float litros) throws LitrosNegativosException {
         if (litros < 0) throw new LitrosNegativosException();
 
         this.tipo = tipo;
@@ -24,11 +24,11 @@ public class Combustible {
         return esTipoValido() && hayCombustibleNecesario(combustibleNecesario);
     }
 
-    private boolean esTipoValido() {
-        return tipo.equals(Tipo.DIESEL) || tipo.equals(Tipo.GASOLINA);
+    public boolean esTipoValido() {
+        return tipo.equalsIgnoreCase("Diésel") || tipo.equalsIgnoreCase("Gasolina");
     }
 
-    private boolean hayCombustibleNecesario(float combustibleNecesario) {
+    public boolean hayCombustibleNecesario(float combustibleNecesario) {
         return combustibleNecesario <= litros;
     }
 

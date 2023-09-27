@@ -4,10 +4,10 @@ import org.example.neumaticos.neumatico.exceptions.PorcentajeDeVidaDeNeumaticosC
 import org.example.neumaticos.neumatico.exceptions.PorcentajeDeVidaNoValidoException;
 
 public class Neumatico {
-    private final Marca marca;
+    private final String marca;
     private final float porcentajeDeVida;
 
-    public Neumatico(Marca marca, float porcentajeDeVida) throws PorcentajeDeVidaNoValidoException {
+    public Neumatico(String marca, float porcentajeDeVida) throws PorcentajeDeVidaNoValidoException {
         if (porcentajeDeVida < 0f || porcentajeDeVida > 100f) throw new PorcentajeDeVidaNoValidoException();
 
         this.marca = marca;
@@ -18,7 +18,7 @@ public class Neumatico {
         return porcentajeDeVida;
     }
 
-    public Marca getMarca() {
+    public String getMarca() {
         return marca;
     }
 
@@ -29,11 +29,11 @@ public class Neumatico {
             throw new PorcentajeDeVidaDeNeumaticosConsumidoPorRecorridoNoValidoException();
     }
 
-    public static boolean esMarcaValida(Marca marca) {
-        return marca.equals(Marca.PIRELLI) || marca.equals(Marca.BRIDGESTONE);
+    public boolean esMarcaValida() {
+        return marca.equalsIgnoreCase("Pirelli") || marca.equalsIgnoreCase("Bridgeston");
     }
 
-    public static boolean noSeDesgasta(float neumaticosDesgaste, float porcentajeDeVida) {
+    public boolean noSeDesgasta(float neumaticosDesgaste) {
         return neumaticosDesgaste <= porcentajeDeVida;
     }
 
