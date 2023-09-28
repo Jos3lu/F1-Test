@@ -1,13 +1,13 @@
 package org.example;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import org.example.neumaticos.neumatico.Neumatico;
 import org.example.neumaticos.neumatico.exceptions.PorcentajeDeVidaDeNeumaticosConsumidoPorRecorridoNoValidoException;
 import org.example.neumaticos.neumatico.exceptions.PorcentajeDeVidaNoValidoException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class NeumaticoTest {
 	
@@ -16,29 +16,112 @@ public class NeumaticoTest {
 	
 	@ParameterizedTest
 	@CsvSource({
-		"-20", "-7", "120", "150"
+		// Given
+		"-20",
+		"-1",
+		"101",
+		"125"
 	})
 	void porcentajeDeVidaNoValido(float porcentajeDeVidaEntrada) {
-		// Given
-		float porcentajeDeVida = porcentajeDeVidaEntrada;
-		
 		// When & Then
-		assertThrows(PorcentajeDeVidaNoValidoException.class, () -> new Neumatico(MARCA, porcentajeDeVida));
+		assertThrows(PorcentajeDeVidaNoValidoException.class, () -> new Neumatico(MARCA, porcentajeDeVidaEntrada));
 	}
 	
 	@ParameterizedTest
 	@CsvSource({
-		"-20", "-7", "120", "150"
+		// Given
+		"-20",
+		"-1",
+		"101",
+		"125"
 	})
 	void porcentajeDeVidaDeNeumaticosConsumidoPorRecorridoNoValido(float 
-			porcentajeDeVidaDeNeumaticosConsumidoPorRecorridoEntrada) {
-		// Given
-		float porcentajeDeVidaDeNeumaticosConsumidoPorRecorrido = 
-				porcentajeDeVidaDeNeumaticosConsumidoPorRecorridoEntrada;
-		
+			porcentajeDeVidaDeNeumaticosConsumidoPorRecorrido) {
 		// When & Then
-		assertThrows(PorcentajeDeVidaDeNeumaticosConsumidoPorRecorridoNoValidoException.class, 
-				() -> Neumatico.esPorcentajeDeVidaDeNeumaticosConsumidoPorRecorridoNoValido(porcentajeDeVidaDeNeumaticosConsumidoPorRecorrido));
+		assertThrows(PorcentajeDeVidaDeNeumaticosConsumidoPorRecorridoNoValidoException.class, () ->
+				Neumatico.esPorcentajeDeVidaDeNeumaticosConsumidoPorRecorridoNoValido(porcentajeDeVidaDeNeumaticosConsumidoPorRecorrido));
+	}
+
+	@Test
+	void getPorcentajeDeVida() throws PorcentajeDeVidaNoValidoException {
+		// Given
+		float porcentajeDeVida = 95f;
+
+		// When
+		Neumatico neumatico = new Neumatico(MARCA, porcentajeDeVida);
+
+		// Then
+		assertEquals(porcentajeDeVida, neumatico.getPorcentajeDeVida());
+	}
+
+	@Test
+	void getMarca() throws PorcentajeDeVidaNoValidoException {
+		// Given
+		String marca = "Bridgeston";
+
+		// When
+		Neumatico neumatico = new Neumatico(marca, PORCENTAJE_DE_VIDA);
+
+		// Then
+		assertEquals(marca, neumatico.getMarca());
+	}
+
+	@ParameterizedTest
+	@CsvSource({
+			// Given
+			"Michelin",
+			"Continental",
+			"Dunlop"
+	})
+	void neumaticoMarcaNoValido(String marca) throws PorcentajeDeVidaNoValidoException {
+		// When
+		Neumatico neumatico = new Neumatico(marca, PORCENTAJE_DE_VIDA);
+
+		// Then
+		assertFalse(neumatico.esMarcaValida());
+	}
+
+	@ParameterizedTest
+	@CsvSource({
+			// Given
+			"Pirelli",
+			"Bridgeston"
+	})
+	void neumaticoMarcaValido(String marca) throws PorcentajeDeVidaNoValidoException {
+		// When
+		Neumatico neumatico = new Neumatico(marca, PORCENTAJE_DE_VIDA);
+
+		// Then
+		assertTrue(neumatico.esMarcaValida());
+	}
+
+	@ParameterizedTest
+	@CsvSource({
+			// Given
+			"71",
+			"90",
+			"100"
+	})
+	void neumaticoSeDesgasta(float neumaticoDesgaste) throws PorcentajeDeVidaNoValidoException {
+		// When
+		Neumatico neumatico = new Neumatico(MARCA, PORCENTAJE_DE_VIDA);
+
+		// Then
+		assertFalse(neumatico.noSeDesgasta(neumaticoDesgaste));
+	}
+
+	@ParameterizedTest
+	@CsvSource({
+			// Given
+			"70",
+			"50"
+	})
+	void neumaticoNoSeDesgasta(float neumaticoDesgaste) throws PorcentajeDeVidaNoValidoException {
+		// When
+		Neumatico neumatico = new Neumatico(MARCA, PORCENTAJE_DE_VIDA);
+
+		// The
+		assertTrue(neumatico.noSeDesgasta(neumaticoDesgaste));
 	}
 
 }

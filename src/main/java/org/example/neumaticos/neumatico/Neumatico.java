@@ -33,8 +33,8 @@ public class Neumatico {
         return marca.equalsIgnoreCase("Pirelli") || marca.equalsIgnoreCase("Bridgeston");
     }
 
-    public boolean noSeDesgasta(float neumaticosDesgaste) {
-        return neumaticosDesgaste <= porcentajeDeVida;
+    public boolean noSeDesgasta(float neumaticoDesgaste) {
+        return neumaticoDesgaste <= porcentajeDeVida;
     }
 
 }

@@ -11,23 +11,26 @@ public class Neumaticos {
         this.neumaticos = neumaticos;
     }
 
-    public boolean sonValidos(float neumaticosDesgaste) {
+    public boolean sonValidos(float neumaticoDesgaste) {
     	Neumatico neumatico = neumaticos.get(0);
         final String marca = neumatico.getMarca();
         final float porcentajeDeVida = neumatico.getPorcentajeDeVida();
 
-        return tiene4Neumaticos() && tienenMismaMarcaYPorcentajeDeVida(marca, porcentajeDeVida)
+        return tiene4Neumaticos() && tienenMismaMarca(marca) && tienenMismoPorcentajeDeVida(porcentajeDeVida)
                 && neumatico.esMarcaValida()
-                && neumatico.noSeDesgasta(neumaticosDesgaste);
+                && neumatico.noSeDesgasta(neumaticoDesgaste);
     }
 
     public boolean tiene4Neumaticos() {
         return neumaticos.size() == 4;
     }
 
-    public boolean tienenMismaMarcaYPorcentajeDeVida(String marca, float porcentajeDeVida) {
-        return neumaticos.stream().allMatch(neumatico -> neumatico.getMarca().equalsIgnoreCase(marca)
-                && neumatico.getPorcentajeDeVida() == porcentajeDeVida);
+    public boolean tienenMismaMarca(String marca) {
+        return neumaticos.stream().allMatch(neumatico -> neumatico.getMarca().equalsIgnoreCase(marca));
+    }
+
+    public boolean tienenMismoPorcentajeDeVida(float porcentajeDeVida) {
+        return neumaticos.stream().allMatch(neumatico -> neumatico.getPorcentajeDeVida() == porcentajeDeVida);
     }
 
 }

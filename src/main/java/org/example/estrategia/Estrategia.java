@@ -33,9 +33,9 @@ public class Estrategia {
 
     public boolean esViable() {
         float combustibleNecesario = combustibleConsumidoPorKmRecorrido * kilometrosARecorrer;
-        float neumaticosDesgaste = porcentajeDeVidaDeNeumaticosConsumidoPorRecorrido * kilometrosARecorrer;
+        float neumaticoDesgaste = porcentajeDeVidaDeNeumaticosConsumidoPorRecorrido * kilometrosARecorrer;
 
-        return combustible.esValido(combustibleNecesario) && neumaticos.sonValidos(neumaticosDesgaste);
+        return combustible.esValido(combustibleNecesario) && neumaticos.sonValidos(neumaticoDesgaste);
     }
 
 }

@@ -1,8 +1,6 @@
 package org.example;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.example.combustible.Combustible;
 import org.example.combustible.exceptions.CombustibleConsumidoPorKmRecorridoNegativoException;
@@ -19,7 +17,7 @@ public class CombustibleTest {
     @Test
     void combustibleLitrosNegativo() {
         // Given
-        float litros = -3f;
+        float litros = -1f;
 
         // When & Then
         assertThrows(LitrosNegativosException.class, () -> new Combustible(TIPO, litros));
@@ -35,11 +33,14 @@ public class CombustibleTest {
     			() -> Combustible.esCombustibleConsumidoPorKmRecorridoNegativo(combustibleConsumidoPorKmRecorrido));
     }
     
-    @Test
-    void combustibleTipoNoValido() throws LitrosNegativosException {
-    	// Given
-    	String tipo = "GAS NATURAL";
-    	
+    @ParameterizedTest
+    @CsvSource({
+            // Given
+            "Gas",
+            "Butano",
+            "Acohol"
+    })
+    void combustibleTipoNoValido(String tipo) throws LitrosNegativosException {
     	// When
     	Combustible combustible = new Combustible(tipo, LITROS);
     	
@@ -47,10 +48,14 @@ public class CombustibleTest {
     	assertFalse(combustible.esTipoValido());
     }
     
-    @Test
-    void noHaycombustibleNecesario() throws LitrosNegativosException {
-    	// Given
-    	float combustibleNecesario = 70f;
+    @ParameterizedTest
+    @CsvSource({
+            // Given
+            "51",
+            "55",
+            "70"
+    })
+    void noHaycombustibleNecesario(float combustibleNecesario) throws LitrosNegativosException {
     	
     	// When
     	Combustible combustible = new Combustible(TIPO, LITROS);
@@ -58,13 +63,43 @@ public class CombustibleTest {
     	// Then
     	assertFalse(combustible.hayCombustibleNecesario(combustibleNecesario));
     }
-    
+
     @ParameterizedTest
     @CsvSource({
-    	"10", "25", "40"
+            // Given
+            "Diésel",
+            "Gasolina"
     })
-    void combustibleValido(float combustibleNecesario) throws LitrosNegativosException {
-        // Given & When
+    void combustibleTipoValido(String tipo) throws LitrosNegativosException {
+        // When
+        Combustible combustible = new Combustible(tipo, LITROS);
+
+        // Then
+        assertTrue(combustible.esTipoValido());
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            // Given
+            "10",
+            "25",
+            "49",
+            "50"
+    })
+    void hayCombustibleNecesario(float combustibleNecesario) throws LitrosNegativosException {
+        // When
+        Combustible combustible = new Combustible(TIPO, LITROS);
+
+        // Then
+        assertTrue(combustible.hayCombustibleNecesario(combustibleNecesario));
+    }
+
+    @Test
+    void combustibleValido() throws LitrosNegativosException {
+        // Given
+        float combustibleNecesario = 45f;
+
+        // When
     	Combustible combustible = new Combustible(TIPO, LITROS);
     	
     	// Then
