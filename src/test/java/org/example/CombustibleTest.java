@@ -38,7 +38,7 @@ public class CombustibleTest {
     @Test
     void combustibleTipoNoValido() throws LitrosNegativosException {
     	// Given
-    	String tipo = new String("GAS NATURAL");
+    	String tipo = "GAS NATURAL";
     	
     	// When
     	Combustible combustible = new Combustible(tipo, LITROS);
@@ -63,11 +63,8 @@ public class CombustibleTest {
     @CsvSource({
     	"10", "25", "40"
     })
-    void combustibleValido(float combustibleEntrada) throws LitrosNegativosException {
-    	// Given
-    	float combustibleNecesario = combustibleEntrada;
-    	
-    	// When
+    void combustibleValido(float combustibleNecesario) throws LitrosNegativosException {
+        // Given & When
     	Combustible combustible = new Combustible(TIPO, LITROS);
     	
     	// Then
