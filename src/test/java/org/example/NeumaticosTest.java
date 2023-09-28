@@ -19,7 +19,7 @@ public class NeumaticosTest {
     private static Neumatico neumaticoBridgeston;
 
     @BeforeAll
-    static void inicalizarNeumaticos() throws PorcentajeDeVidaNoValidoException {
+    static void inicializarNeumaticos() throws PorcentajeDeVidaNoValidoException {
         neumaticoPirelli = new Neumatico("Pirelli", 75f);
         neumaticoBridgeston = new Neumatico("Bridgeston", 75f);
     }
