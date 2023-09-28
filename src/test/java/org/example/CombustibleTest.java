@@ -47,6 +47,20 @@ public class CombustibleTest {
     	// Then
     	assertFalse(combustible.esTipoValido());
     }
+
+    @ParameterizedTest
+    @CsvSource({
+            // Given
+            "Diésel",
+            "Gasolina"
+    })
+    void combustibleTipoValido(String tipo) throws LitrosNegativosException {
+        // When
+        Combustible combustible = new Combustible(tipo, LITROS);
+
+        // Then
+        assertTrue(combustible.esTipoValido());
+    }
     
     @ParameterizedTest
     @CsvSource({
@@ -62,20 +76,6 @@ public class CombustibleTest {
     	
     	// Then
     	assertFalse(combustible.hayCombustibleNecesario(combustibleNecesario));
-    }
-
-    @ParameterizedTest
-    @CsvSource({
-            // Given
-            "Diésel",
-            "Gasolina"
-    })
-    void combustibleTipoValido(String tipo) throws LitrosNegativosException {
-        // When
-        Combustible combustible = new Combustible(tipo, LITROS);
-
-        // Then
-        assertTrue(combustible.esTipoValido());
     }
 
     @ParameterizedTest
