@@ -1,7 +1,6 @@
 package org.example;
 
 import org.example.neumaticos.neumatico.Neumatico;
-import org.example.neumaticos.neumatico.exceptions.PorcentajeDeVidaDeNeumaticosConsumidoPorRecorridoNoValidoException;
 import org.example.neumaticos.neumatico.exceptions.PorcentajeDeVidaNoValidoException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -26,21 +25,6 @@ public class NeumaticoTest {
 	void neumaticoPorcentajeDeVidaNoValido(float porcentajeDeVidaEntrada) {
 		// When & Then
 		assertThrows(PorcentajeDeVidaNoValidoException.class, () -> new Neumatico(MARCA, porcentajeDeVidaEntrada));
-	}
-	
-	@ParameterizedTest
-	@ValueSource(floats = {
-		// Given
-		-20f,
-		-1f,
-		101f,
-		125f
-	})
-	void neumaticoPorcentajeDeVidaDeNeumaticosConsumidoPorRecorridoNoValido(float
-			porcentajeDeVidaDeNeumaticosConsumidoPorRecorrido) {
-		// When & Then
-		assertThrows(PorcentajeDeVidaDeNeumaticosConsumidoPorRecorridoNoValidoException.class, () ->
-				Neumatico.esPorcentajeDeVidaDeNeumaticosConsumidoPorRecorridoNoValido(porcentajeDeVidaDeNeumaticosConsumidoPorRecorrido));
 	}
 
 	@Test

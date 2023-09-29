@@ -3,7 +3,7 @@ package org.example;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.example.combustible.Combustible;
-import org.example.combustible.exceptions.CombustibleConsumidoPorKmRecorridoNegativoException;
+import org.example.estrategia.exceptions.CombustibleConsumidoPorKmRecorridoNegativoException;
 import org.example.combustible.exceptions.LitrosNegativoException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -22,16 +22,6 @@ public class CombustibleTest {
 
         // When & Then
         assertThrows(LitrosNegativoException.class, () -> new Combustible(TIPO, litros));
-    }
-    
-    @Test
-    void combustibleConsumidoPorKmRecorridoNegativo() {
-    	// Given 
-    	float combustibleConsumidoPorKmRecorrido = -1f;
-    	
-    	// When & Then
-    	assertThrows(CombustibleConsumidoPorKmRecorridoNegativoException.class, 
-    			() -> Combustible.esCombustibleConsumidoPorKmRecorridoNegativo(combustibleConsumidoPorKmRecorrido));
     }
     
     @ParameterizedTest

@@ -1,4 +1,4 @@
-package org.example.neumaticos.neumatico.exceptions;
+package org.example.estrategia.exceptions;
 
 public class PorcentajeDeVidaDeNeumaticosConsumidoPorRecorridoNoValidoException extends Exception{
 }

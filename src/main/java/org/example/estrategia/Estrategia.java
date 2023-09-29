@@ -1,10 +1,9 @@
 package org.example.estrategia;
 
 import org.example.combustible.Combustible;
-import org.example.combustible.exceptions.CombustibleConsumidoPorKmRecorridoNegativoException;
+import org.example.estrategia.exceptions.CombustibleConsumidoPorKmRecorridoNegativoException;
 import org.example.estrategia.exceptions.KilometrosARecorrerNegativoException;
-import org.example.neumaticos.neumatico.Neumatico;
-import org.example.neumaticos.neumatico.exceptions.PorcentajeDeVidaDeNeumaticosConsumidoPorRecorridoNoValidoException;
+import org.example.estrategia.exceptions.PorcentajeDeVidaDeNeumaticosConsumidoPorRecorridoNoValidoException;
 import org.example.neumaticos.Neumaticos;
 
 public class Estrategia {
@@ -21,14 +20,27 @@ public class Estrategia {
 
         // Throw Exceptions if negative values
         esKilometrosARecorrerNegativo(kilometrosARecorrer);
-        Combustible.esCombustibleConsumidoPorKmRecorridoNegativo(combustibleConsumidoPorKmRecorrido);
-        Neumatico.esPorcentajeDeVidaDeNeumaticosConsumidoPorRecorridoNoValido(porcentajeDeVidaDeNeumaticosConsumidoPorRecorrido);
+        esCombustibleConsumidoPorKmRecorridoNegativo(combustibleConsumidoPorKmRecorrido);
+        esPorcentajeDeVidaDeNeumaticosConsumidoPorRecorridoNoValido(porcentajeDeVidaDeNeumaticosConsumidoPorRecorrido);
 
         this.combustible = combustible;
         this.combustibleConsumidoPorKmRecorrido = combustibleConsumidoPorKmRecorrido;
         this.neumaticos = neumaticos;
         this.porcentajeDeVidaDeNeumaticosConsumidoPorRecorrido = porcentajeDeVidaDeNeumaticosConsumidoPorRecorrido;
         this.kilometrosARecorrer = kilometrosARecorrer;
+    }
+
+    private void esCombustibleConsumidoPorKmRecorridoNegativo(float combustibleConsumidoPorKmRecorrido)
+            throws CombustibleConsumidoPorKmRecorridoNegativoException {
+        if (combustibleConsumidoPorKmRecorrido < 0f)
+            throw new CombustibleConsumidoPorKmRecorridoNegativoException();
+    }
+
+    private void esPorcentajeDeVidaDeNeumaticosConsumidoPorRecorridoNoValido(float porcentajeDeVidaDeNeumaticosConsumidoPorRecorrido)
+            throws PorcentajeDeVidaDeNeumaticosConsumidoPorRecorridoNoValidoException {
+        if (porcentajeDeVidaDeNeumaticosConsumidoPorRecorrido < 0f ||
+                porcentajeDeVidaDeNeumaticosConsumidoPorRecorrido > 100f)
+            throw new PorcentajeDeVidaDeNeumaticosConsumidoPorRecorridoNoValidoException();
     }
 
     private void esKilometrosARecorrerNegativo(float kilometrosARecorrer) throws KilometrosARecorrerNegativoException {

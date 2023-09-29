@@ -1,6 +1,5 @@
 package org.example.combustible;
 
-import org.example.combustible.exceptions.CombustibleConsumidoPorKmRecorridoNegativoException;
 import org.example.combustible.exceptions.LitrosNegativoException;
 
 public class Combustible {
@@ -16,12 +15,6 @@ public class Combustible {
 
     private void esLitrosNegativo(float litros) throws LitrosNegativoException {
         if (litros < 0) throw new LitrosNegativoException();
-    }
-
-    public static void esCombustibleConsumidoPorKmRecorridoNegativo(float combustibleConsumidoPorKmRecorrido)
-            throws CombustibleConsumidoPorKmRecorridoNegativoException {
-        if (combustibleConsumidoPorKmRecorrido < 0f)
-            throw new CombustibleConsumidoPorKmRecorridoNegativoException();
     }
 
     public boolean esValido(float combustibleNecesario) {

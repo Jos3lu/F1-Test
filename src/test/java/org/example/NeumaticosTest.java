@@ -2,9 +2,12 @@ package org.example;
 
 import org.example.neumaticos.Neumaticos;
 import org.example.neumaticos.neumatico.Neumatico;
+import org.example.estrategia.exceptions.PorcentajeDeVidaDeNeumaticosConsumidoPorRecorridoNoValidoException;
 import org.example.neumaticos.neumatico.exceptions.PorcentajeDeVidaNoValidoException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.List;

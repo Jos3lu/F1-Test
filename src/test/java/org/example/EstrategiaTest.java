@@ -1,16 +1,18 @@
 package org.example;
 
 import org.example.combustible.Combustible;
-import org.example.combustible.exceptions.CombustibleConsumidoPorKmRecorridoNegativoException;
+import org.example.estrategia.exceptions.CombustibleConsumidoPorKmRecorridoNegativoException;
 import org.example.combustible.exceptions.LitrosNegativoException;
 import org.example.estrategia.Estrategia;
 import org.example.estrategia.exceptions.KilometrosARecorrerNegativoException;
 import org.example.neumaticos.Neumaticos;
 import org.example.neumaticos.neumatico.Neumatico;
-import org.example.neumaticos.neumatico.exceptions.PorcentajeDeVidaDeNeumaticosConsumidoPorRecorridoNoValidoException;
+import org.example.estrategia.exceptions.PorcentajeDeVidaDeNeumaticosConsumidoPorRecorridoNoValidoException;
 import org.example.neumaticos.neumatico.exceptions.PorcentajeDeVidaNoValidoException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 
@@ -31,33 +33,41 @@ public class EstrategiaTest {
         neumaticos = new Neumaticos(Arrays.asList(neumatico, neumatico, neumatico, neumatico));
     }
 
-    @Test
-    void estrategiaKilometrosARecorrerNegativo() {
-        // Given
-        float kilometrosARecorrer = -5f;
-
+    @ParameterizedTest
+    @ValueSource(floats = {
+            // Given
+            -.1f,
+            -5f
+    })
+    void estrategiaKilometrosARecorrerNegativo(float kilometrosARecorrer) {
         // When & Then
         assertThrows(KilometrosARecorrerNegativoException.class, () -> new Estrategia(combustible,
                 COMBUSTIBLE_CONSUMIDO_POR_KILOMETRO_RECORRIDO, neumaticos,
                 PORCENTAJE_DE_VIDA_DE_NEUMATICOS_CONSUMIDOS_POR_RECORRIDO, kilometrosARecorrer));
     }
 
-    @Test
-    void estrategiaCombustibleConsumidoPorKmRecorridoNegativo() {
-        // Given
-        float combustibleConsumidoPorKmRecorrido = -5f;
-
+    @ParameterizedTest
+    @ValueSource(floats = {
+            // Given
+            -.1f,
+            -5f
+    })
+    void estrategiaCombustibleConsumidoPorKmRecorridoNegativo(float combustibleConsumidoPorKmRecorrido) {
         // When & Then
         assertThrows(CombustibleConsumidoPorKmRecorridoNegativoException.class, () -> new Estrategia(combustible,
                 combustibleConsumidoPorKmRecorrido, neumaticos, PORCENTAJE_DE_VIDA_DE_NEUMATICOS_CONSUMIDOS_POR_RECORRIDO,
                 KILOMETROS_A_RECORRER));
     }
 
-    @Test
-    void estrategiaPorcentajeDeVidaDeNeumaticosConsumidoPorRecorridoNoValido() {
-        // Given
-        float porcentajeDeVidaDeNeumaticosConsumidoPorRecorrido = -5f;
-
+    @ParameterizedTest
+    @ValueSource(floats = {
+            // Given
+            -.1f,
+            -5f,
+            100.1f,
+            125f
+    })
+    void estrategiaPorcentajeDeVidaDeNeumaticosConsumidoPorRecorridoNoValido(float porcentajeDeVidaDeNeumaticosConsumidoPorRecorrido) {
         // When & Then
         assertThrows(PorcentajeDeVidaDeNeumaticosConsumidoPorRecorridoNoValidoException.class, () -> new Estrategia(combustible,
                 COMBUSTIBLE_CONSUMIDO_POR_KILOMETRO_RECORRIDO, neumaticos, porcentajeDeVidaDeNeumaticosConsumidoPorRecorrido,
