@@ -29,11 +29,15 @@ public class Neumatico {
             throw new PorcentajeDeVidaDeNeumaticosConsumidoPorRecorridoNoValidoException();
     }
 
-    public boolean esMarcaValida() {
+    public boolean esValido(float neumaticoDesgaste) {
+        return esMarcaValida() && noSeDesgasta(neumaticoDesgaste);
+    }
+
+    private boolean esMarcaValida() {
         return marca.equalsIgnoreCase("Pirelli") || marca.equalsIgnoreCase("Bridgeston");
     }
 
-    public boolean noSeDesgasta(float neumaticoDesgaste) {
+    private boolean noSeDesgasta(float neumaticoDesgaste) {
         return neumaticoDesgaste <= porcentajeDeVida;
     }
 

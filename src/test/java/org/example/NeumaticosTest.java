@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,13 +16,17 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class NeumaticosTest {
 
+    private final static float NEUMATICO_DESGASTE = 50f;
+
     private static Neumatico neumaticoPirelli;
     private static Neumatico neumaticoBridgeston;
+    private static Neumatico neumaticoBridgeston50PorcentajeDeVida;
 
     @BeforeAll
     static void inicializarNeumaticos() throws PorcentajeDeVidaNoValidoException {
         neumaticoPirelli = new Neumatico("Pirelli", 75f);
         neumaticoBridgeston = new Neumatico("Bridgeston", 75f);
+        neumaticoBridgeston50PorcentajeDeVida = new Neumatico("Bridgeston", 50f);
     }
 
     @Test
@@ -33,7 +38,7 @@ public class NeumaticosTest {
         Neumaticos neumaticos = new Neumaticos(neumaticoList);
 
         // Then
-        assertFalse(neumaticos.tiene4Neumaticos());
+        assertFalse(neumaticos.sonValidos(NEUMATICO_DESGASTE));
     }
 
     @Test
@@ -46,13 +51,12 @@ public class NeumaticosTest {
         Neumaticos neumaticos = new Neumaticos(neumaticoList);
 
         // Then
-        assertTrue(neumaticos.tiene4Neumaticos());
+        assertTrue(neumaticos.sonValidos(NEUMATICO_DESGASTE));
     }
 
     @Test
     void neumaticosNoTienenMismaMarca() {
         // Given
-        String marca = neumaticoPirelli.getMarca();
         List<Neumatico> neumaticoList = Arrays.asList(neumaticoPirelli, neumaticoPirelli,
                 neumaticoBridgeston, neumaticoBridgeston);
 
@@ -60,13 +64,12 @@ public class NeumaticosTest {
         Neumaticos neumaticos = new Neumaticos(neumaticoList);
 
         // Then
-        assertFalse(neumaticos.tienenMismaMarca(marca));
+        assertFalse(neumaticos.sonValidos(NEUMATICO_DESGASTE));
     }
 
     @Test
     void neumaticosTienenMismaMarca() {
         // Given
-        String marca = neumaticoBridgeston.getMarca();
         List<Neumatico> neumaticoList = Arrays.asList(neumaticoBridgeston, neumaticoBridgeston,
                 neumaticoBridgeston, neumaticoBridgeston);
 
@@ -74,14 +77,12 @@ public class NeumaticosTest {
         Neumaticos neumaticos = new Neumaticos(neumaticoList);
 
         // Then
-        assertTrue(neumaticos.tienenMismaMarca(marca));
+        assertTrue(neumaticos.sonValidos(NEUMATICO_DESGASTE));
     }
 
     @Test
-    void neumaticosNoTienenMismoPorcentajeDeVida() throws PorcentajeDeVidaNoValidoException {
+    void neumaticosNoTienenMismoPorcentajeDeVida() {
         // Given
-        float porcentajeDeVida = neumaticoBridgeston.getPorcentajeDeVida();
-        Neumatico neumaticoBridgeston50PorcentajeDeVida = new Neumatico("Bridgeston", 50f);
         List<Neumatico> neumaticoList = Arrays.asList(neumaticoBridgeston, neumaticoBridgeston,
                 neumaticoBridgeston50PorcentajeDeVida, neumaticoBridgeston50PorcentajeDeVida);
 
@@ -89,13 +90,12 @@ public class NeumaticosTest {
         Neumaticos neumaticos = new Neumaticos(neumaticoList);
 
         // Then
-        assertFalse(neumaticos.tienenMismoPorcentajeDeVida(porcentajeDeVida));
+        assertFalse(neumaticos.sonValidos(NEUMATICO_DESGASTE));
     }
 
     @Test
     void neumaticosTienenMismoPorcentajeDeVida() {
         // Given
-        float porcentajeDeVida = neumaticoBridgeston.getPorcentajeDeVida();
         List<Neumatico> neumaticoList = Arrays.asList(neumaticoBridgeston, neumaticoBridgeston,
                 neumaticoBridgeston, neumaticoBridgeston);
 
@@ -103,47 +103,7 @@ public class NeumaticosTest {
         Neumaticos neumaticos = new Neumaticos(neumaticoList);
 
         // Then
-        assertTrue(neumaticos.tienenMismoPorcentajeDeVida(porcentajeDeVida));
-    }
-
-    @ParameterizedTest
-    @CsvSource({
-            // Given
-            "76",
-            "80",
-            "90",
-            "100"
-    })
-    void NeumaticosNoSonValidos(float neumaticoDesgaste) {
-        // Given
-        List<Neumatico> neumaticoList = Arrays.asList(neumaticoPirelli, neumaticoPirelli,
-                neumaticoPirelli, neumaticoPirelli);
-
-        // When
-        Neumaticos neumaticos = new Neumaticos(neumaticoList);
-
-        // Then
-        assertFalse(neumaticos.sonValidos(neumaticoDesgaste));
-    }
-
-    @ParameterizedTest
-    @CsvSource({
-            // Given
-            "75",
-            "70",
-            "50",
-            "25"
-    })
-    void NeumaticosSonValidos(float neumaticoDesgaste) {
-        // Given
-        List<Neumatico> neumaticoList = Arrays.asList(neumaticoPirelli, neumaticoPirelli,
-                neumaticoPirelli, neumaticoPirelli);
-
-        // When
-        Neumaticos neumaticos = new Neumaticos(neumaticoList);
-
-        // Then
-        assertTrue(neumaticos.sonValidos(neumaticoDesgaste));
+        assertTrue(neumaticos.sonValidos(NEUMATICO_DESGASTE));
     }
 
 }

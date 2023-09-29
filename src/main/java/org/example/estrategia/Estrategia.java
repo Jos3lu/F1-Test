@@ -20,7 +20,7 @@ public class Estrategia {
             KilometrosARecorrerNegativoException {
 
         // Throw Exceptions if negative values
-        if (kilometrosARecorrer < 0f) throw new KilometrosARecorrerNegativoException();
+        esKilometrosARecorrerNegativo(kilometrosARecorrer);
         Combustible.esCombustibleConsumidoPorKmRecorridoNegativo(combustibleConsumidoPorKmRecorrido);
         Neumatico.esPorcentajeDeVidaDeNeumaticosConsumidoPorRecorridoNoValido(porcentajeDeVidaDeNeumaticosConsumidoPorRecorrido);
 
@@ -29,6 +29,10 @@ public class Estrategia {
         this.neumaticos = neumaticos;
         this.porcentajeDeVidaDeNeumaticosConsumidoPorRecorrido = porcentajeDeVidaDeNeumaticosConsumidoPorRecorrido;
         this.kilometrosARecorrer = kilometrosARecorrer;
+    }
+
+    private void esKilometrosARecorrerNegativo(float kilometrosARecorrer) throws KilometrosARecorrerNegativoException {
+        if (kilometrosARecorrer < 0f) throw new KilometrosARecorrerNegativoException();
     }
 
     public boolean esViable() {
