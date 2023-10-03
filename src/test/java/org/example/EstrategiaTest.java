@@ -152,7 +152,7 @@ public class EstrategiaTest {
             KilometrosARecorrerNegativoException, CombustibleConsumidoPorKmRecorridoNegativoException {
         // Given
         Neumatico neumaticoPirelli = new Neumatico("Pirelli", 75f);
-        Neumatico neumaticoBridgeston = new Neumatico("Bridgeston", 75f);
+        Neumatico neumaticoBridgeston = new Neumatico("Bridgestone", 75f);
         Neumaticos neumaticos = new Neumaticos(Arrays.asList(neumaticoPirelli, neumaticoBridgeston, neumaticoPirelli, neumaticoBridgeston));
 
         // When
@@ -168,7 +168,7 @@ public class EstrategiaTest {
             KilometrosARecorrerNegativoException, CombustibleConsumidoPorKmRecorridoNegativoException {
         // Given
         Neumatico neumaticoPirelli90PorcentajeDeVida = new Neumatico("Pirelli", 90f);
-        Neumatico neumaticoPirelli75PorcentajeDeVida = new Neumatico("Bridgeston", 75f);
+        Neumatico neumaticoPirelli75PorcentajeDeVida = new Neumatico("Bridgestone", 75f);
         Neumaticos neumaticos = new Neumaticos(Arrays.asList(neumaticoPirelli75PorcentajeDeVida, neumaticoPirelli90PorcentajeDeVida,
                 neumaticoPirelli75PorcentajeDeVida, neumaticoPirelli90PorcentajeDeVida));
 

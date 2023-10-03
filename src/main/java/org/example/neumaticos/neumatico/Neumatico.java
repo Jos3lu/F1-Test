@@ -30,7 +30,7 @@ public class Neumatico {
     }
 
     private boolean esMarcaValida() {
-        return marca.equalsIgnoreCase("Pirelli") || marca.equalsIgnoreCase("Bridgeston");
+        return marca.equalsIgnoreCase("Pirelli") || marca.equalsIgnoreCase("Bridgestone");
     }
 
     private boolean noSeDesgasta(float neumaticoDesgaste) {

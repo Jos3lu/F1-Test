@@ -42,7 +42,7 @@ public class NeumaticoTest {
 	@Test
 	void neumaticoGetMarca() throws PorcentajeDeVidaNoValidoException {
 		// Given
-		String marca = "Bridgeston";
+		String marca = "Bridgestone";
 
 		// When
 		Neumatico neumatico = new Neumatico(marca, PORCENTAJE_DE_VIDA);
@@ -70,7 +70,7 @@ public class NeumaticoTest {
 	@ValueSource(strings = {
 			// Given
 			"Pirelli",
-			"Bridgeston"
+			"Bridgestone"
 	})
 	void neumaticoMarcaValido(String marca) throws PorcentajeDeVidaNoValidoException {
 		// When

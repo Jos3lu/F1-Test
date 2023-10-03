@@ -2,12 +2,9 @@ package org.example;
 
 import org.example.neumaticos.Neumaticos;
 import org.example.neumaticos.neumatico.Neumatico;
-import org.example.estrategia.exceptions.PorcentajeDeVidaDeNeumaticosConsumidoPorRecorridoNoValidoException;
 import org.example.neumaticos.neumatico.exceptions.PorcentajeDeVidaNoValidoException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.List;
@@ -25,8 +22,8 @@ public class NeumaticosTest {
     @BeforeAll
     static void inicializarNeumaticos() throws PorcentajeDeVidaNoValidoException {
         neumaticoPirelli = new Neumatico("Pirelli", 75f);
-        neumaticoBridgeston = new Neumatico("Bridgeston", 75f);
-        neumaticoBridgeston50PorcentajeDeVida = new Neumatico("Bridgeston", 50f);
+        neumaticoBridgeston = new Neumatico("Bridgestone", 75f);
+        neumaticoBridgeston50PorcentajeDeVida = new Neumatico("Bridgestone", 50f);
     }
 
     @Test
