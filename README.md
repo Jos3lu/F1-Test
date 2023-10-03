@@ -17,7 +17,7 @@
 3. Run Tests for Neumatico
 4. Run Tests for Neumaticos
 5. Run Tests for Estrategia
-* You can also run all the Tests at the same time
+(You can also run all the Tests at the same time)
 
 
 
